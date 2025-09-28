@@ -1,0 +1,180 @@
+/* Reset some default browser styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Global styles */
+html, body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* Header */
+header.h {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #004080;
+  color: #fff;
+  padding: 15px 30px;
+  font-size: 1.2rem;
+}
+
+/* Navigation */
+nav.h {
+  background: #0066cc;
+}
+nav.h ul {
+  display: flex;
+  list-style: none;
+  justify-content: center;
+}
+nav.h ul li {
+  margin: 0 15px;
+}
+nav.h ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+nav.h ul li a:hover {
+  color: #ffcc00;
+}
+
+/* Main content */
+main {
+  flex: 1;
+  padding: 20px;
+}
+
+.sec {
+  margin: 20px 0;
+  padding: 15px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Image gallery */
+.sec .img {
+  display: inline-block;
+  margin: 10px;
+}
+.sec .img img {
+  width: 250px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 6px;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.2);
+}
+
+/* About section */
+.sec p {
+  margin-top: 10px;
+  text-align: justify;
+}
+
+footer {
+  background: #004080;
+  color: #fff;
+  text-align: center;
+  padding: 15px 0;
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+  header.h {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  nav.h ul {
+    flex-direction: column;
+  }
+
+  nav.h ul li {
+    margin: 10px 0;
+  }
+
+  .sec .img img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+/* Login Section */
+.login-section {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.login-section h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #004080;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-form label {
+    margin: 10px 0 5px;
+    font-weight: bold;
+}
+
+.login-form input,
+.login-form select {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s;
+}
+
+.login-form input:focus,
+.login-form select:focus {
+    border-color: #0066cc;
+    outline: none;
+}
+
+.login-form button {
+    margin-top: 20px;
+    padding: 12px;
+    background-color: #004080;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.login-form button:hover {
+    background-color: #0066cc;
+}
+
+.login-section p {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.login-section a {
+    color: #0066cc;
+    text-decoration: none;
+}
+
+.login-section a:hover {
+    text-decoration: underline;
+}
