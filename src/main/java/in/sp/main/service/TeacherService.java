@@ -4,6 +4,6 @@ import in.sp.main.entity.Teacher;
 
 public interface TeacherService {
 	public Teacher AddTeacher(Teacher t);
-		  
+	public Teacher GetTeacher(String email,String password);
 	   
 }

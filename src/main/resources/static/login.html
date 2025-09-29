@@ -23,7 +23,7 @@
     <main>
         <section class="login-section">
             <h2>Login</h2>
-            <form action="#" method="POST" class="login-form">
+            <form action="#" method="POST" class="login-form" id="login">
                 <label for="userType">User Type</label>
                 <select id="userType" name="userType" required>
                     <option value="">--Select User Type--</option>
@@ -39,12 +39,54 @@
 
                 <button type="submit">Login</button>
             </form>
-            <p>Don't have an account? <a href="teacher-signup.html">Sign Up</a></p>
+            <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
         </section>
     </main>
 
     <footer>
         <p>&copy; 2025 ABC School | All Rights Reserved</p>
     </footer>
+	            <script>
+					document.getElementById("login").addEventListener('submit',async function(e){
+						e.preventDefault();
+						const user_type=document.getElementById("userType").value;
+						if(user_type==="teacher"){
+						const email=document.getElementById("email").value;
+						const password = document.getElementById('password').value;
+						
+						// Create JSON object
+						const loginObj = {email, password};
+						
+						try{
+							// Send POST request to Spring Boot controller
+							const response = 
+							await fetch(
+								'http://localhost:8081/teacher/login', {
+							    method: 'POST',
+							    headers: { 'Content-Type': 'application/json' },
+							    body: JSON.stringify(loginObj)
+							}
+							);
+							const result = await response.text();
+							if (response.ok) {
+							            alert(result); // show "Teacher added successfully!"
+							            window.location.href = 'abc.html'; // redirect to login page
+							        } else {
+							            alert('Error: ' + result);
+							        }
+
+							
+						}
+						catch(error){
+							alert("network error: "+error);
+						}}
+						else{
+							alert("student login page ws not devloped")
+						}
+						
+						
+					})
+					
+				</script>
 </body>
 </html>

@@ -19,6 +19,21 @@ public class TeacherServiceImpl implements  TeacherService{
 		   
 		  
 	   }
+
+	   @Override
+	   public Teacher GetTeacher(String email, String password) {
+		 Teacher validTeacher=tr.findByEmail(email);
+		 if(validTeacher!=null&&validTeacher.getPassword().equals(password)) {
+			 return validTeacher;
+		 }
+		 else {
+			 throw new RuntimeException("Invalid Username or Password ");
+		 }
+	   }
+
+	 
+	   
+	
 	   
 	   
 }
