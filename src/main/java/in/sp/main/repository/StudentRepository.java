@@ -6,4 +6,6 @@ import in.sp.main.entity.Student;
 
 public interface StudentRepository extends JpaRepository<Student,Integer> {
 
+	Student findByEmail(String email);
+
 }

@@ -17,7 +17,10 @@ public class Student {
 	@Column
 	private String name;
 	@Column
+	private String email;
+	@Column
 	private String Course;
+
 	@Column
 	private String password;
 	@Column(nullable = false, columnDefinition = "int default 0")
@@ -28,6 +31,12 @@ public class Student {
 	}
 	public void setAttendance(int attendance) {
 		this.attendance = attendance;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	public int getId() {
 		return id;

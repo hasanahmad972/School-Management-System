@@ -85,7 +85,25 @@ public class MyController {
 		                .body(errorResponse);
 		    }
 		}
-
+	@PostMapping("/student/login")
+    public ResponseEntity<?> loginstudent(@RequestBody Student s,HttpSession session){
+		       System.out.println(s);
+		try {
+			Student validStudent=ss.GetStudent(s.getEmail(), s.getPassword());
+			if(validStudent!=null) {
+				session.setAttribute("username",validStudent.getName());
+			}
+			return ResponseEntity.ok(validStudent.getName()+" login succesfully");
+		}
+		catch(Exception e) {
+			return ResponseEntity
+					.badRequest()
+					.body("error :"+e.getMessage());
+		}
+		
+		  
+    	
+    }
 	
 }
 

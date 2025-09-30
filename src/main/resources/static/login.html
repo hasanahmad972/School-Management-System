@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login | ABC School</title>
     <link rel="stylesheet" href="login.css">
 </head>
+
 <body>
     <header class="h">
         <div>ABC School</div>
@@ -46,51 +48,72 @@
     <footer>
         <p>&copy; 2025 ABC School | All Rights Reserved</p>
     </footer>
-	            <script>
-					document.getElementById("login").addEventListener('submit',async function(e){
-						e.preventDefault();
-						const user_type=document.getElementById("userType").value;
-						if(user_type==="teacher"){
-						const email=document.getElementById("email").value;
-						const password = document.getElementById('password').value;
-						
-						// Create JSON object
-						const loginObj = {email, password};
-						
-						try{
-							// Send POST request to Spring Boot controller
-							const response = 
-							await fetch(
-								'http://localhost:8081/teacher/login', {
-							    method: 'POST',
-							    headers: { 'Content-Type': 'application/json' },
-							    body: JSON.stringify(loginObj),
-								credentials:"include"
-								
-							}
-							);
-							const result = await response.text();
-							if (response.ok) {
-							            alert(result); // show "Teacher added successfully!"
-							            
-										window.location.href = 'teacherdashboard.html'; // redirect to login page
-										
-							        } else {
-							            alert('Error: ' + result);
-							        }
+    <script>
+        document.getElementById("login").addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const user_type = document.getElementById("userType").value;
+            const email = document.getElementById("email").value;
+            const password = document.getElementById('password').value;
+            // Create JSON object
+            const loginObj = { email, password };
+            if (user_type === "teacher") {
+                try {
+                    // Send POST request to Spring Boot controller
+                    const response =
+                        await fetch(
+                            'http://localhost:8081/teacher/login', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(loginObj),
+                            credentials: "include"
 
-							
-						}
-						catch(error){
-							alert("network error: "+error);
-						}}
-						else{
-							alert("student login page ws not devloped")
-						}
-						
-						
-					})
-					
-				</script>
+                        }
+                        );
+                    const result = await response.text();
+                    if (response.ok) {
+                        alert(result); // show "Teacher added successfully!"
+
+                        window.location.href = 'teacherdashboard.html'; // redirect to login page
+
+                    } else {
+                        alert('Error: ' + result);
+                    }
+
+
+                }
+                catch (error) {
+                    alert("network error: " + error);
+                }
+            }
+            else {
+                try {
+                    const response = await fetch('http://localhost:8081/student/login', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(loginObj),
+                        credentials: "include"
+                    });
+                    const result = await response.text();
+                    if (response.ok) {
+                        alert(result);
+
+                        window.location.href = 'studentdashboard.html'; 
+
+                    } else {
+                        alert('Error: ' + result);
+                    }
+
+
+                }
+                catch (error) {
+                    alert("network error: " + error);
+
+                }
+            }
+
+        })
+
+    </script>
 </body>
+
 </html>

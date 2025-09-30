@@ -15,13 +15,14 @@
         <div id="welcome"> </div>
     </header>
     <!--Main navigation-->
-    <nav class="h" class="nav">
+     <nav class="h" class="nav">
        <ul>
 		<li><a href="teacherdashboard.html">Home</a></li>
         <li><a href="addStudent.html">ADD STUDENT</a></li>
         <li><a href="updateStudent.html">UPDATE STUDENT DETAILS</a></li>
         <li><a href="updateAttendance.html">UPDATE ATTANDANCE</a></li>
-        <li><a href="changepassword.html">Change Password</a></li>
+        <li><a href="changepassword.html">CHANGE PASSWORD</a></li>
+        <li><a href="logout.html">LOGOUT</a></li>
 
        </ul>
     </nav>
@@ -34,7 +35,11 @@
 
         <label for="course">Course:</label>
         <input type="text" id="course" name="course" required><br><br>
-
+		
+		<label for="email">Email:</label>
+	    <input type="email" id="email" name="email" required><br><br>
+		
+		
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required><br><br>
 
@@ -74,9 +79,10 @@
              
             const name=document.getElementById('name').value;
             const course=document.getElementById('course').value;
+			const email=document.getElementById('email').value;
             const password=document.getElementById('password').value;
             
-            const reqobj={name,course,password};
+            const reqobj={name,course,email,password};
             try {
                 const response=await fetch('http://localhost:8081/student/adddetails',{
                         method:'Post',
@@ -90,6 +96,7 @@
                     <p><strong>Generated Student ID:</strong> ${result.id}</p>
                     <p><strong>Name:</strong> ${result.name}</p>
                     <p><strong>Course:</strong> ${result.course}</p>
+					<p><strong>Email:</strong> ${result.email}</p>
                     <p><strong>Password:</strong> ${result.password}</p>
                     <p>Please share this info with the student.</p>
                 `;
