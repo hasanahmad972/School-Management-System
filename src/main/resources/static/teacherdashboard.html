@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+    
+</head>
+<body>
+
+    <!--Top BAR-->
+    <header class="h" id="header">
+        <div> ABC School </div>
+        <div id="welcome"> </div>
+    </header>
+    <!--Main navigation-->
+    <nav class="h" class="nav">
+       <ul>
+		<li><a href="teacherdashboard.html">Home</a></li>
+        <li><a href="addStudent.html">ADD STUDENT</a></li>
+        <li><a href="updateStudent.html">UPDATE STUDENT DETAILS</a></li>
+        <li><a href="updateAttendance.html">UPDATE ATTANDANCE</a></li>
+        <li><a href="changepassword.html">Change Password</a></li>
+
+       </ul>
+    </nav>
+    <!-- MAIN-->
+     <main>
+        
+     </main>
+     <!---->
+     <aside>
+
+     </aside>
+     <footer>
+        <p>&copy; 2025 ABC School |All Rights Reserved</p>
+     </footer>
+     <script>
+        async function loaduser() {
+            const res=await fetch(
+								'http://localhost:8081/teacher/login/user-info',{
+								credentials:"include"
+								
+                                }
+							);
+            const teacherData=await res.json();
+            if(teacherData.username){
+            document.getElementById("welcome").innerHTML="Welcome, "+teacherData.username
+            }
+            else{
+                window.location.href="login.html";
+            }
+        }
+        loaduser();
+     </script>
+
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+    
+</head>
+<body>
+
+    <!--Top BAR-->
+    <header class="h" id="header">
+        <div> ABC School </div>
+        <div id="welcome"> </div>
+    </header>
+    <!--Main navigation-->
+    <nav class="h" class="nav">
+       <ul>
+		<li><a href="teacherdashboard.html">Home</a></li>
+        <li><a href="addStudent.html">ADD STUDENT</a></li>
+        <li><a href="updateStudent.html">UPDATE STUDENT DETAILS</a></li>
+        <li><a href="updateAttendance.html">UPDATE ATTANDANCE</a></li>
+        <li><a href="changepassword.html">Change Password</a></li>
+
+       </ul>
+    </nav>
+    <!-- MAIN-->
+     <main>
+          
+      <form  method="post" id="addStudent">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="course">Course:</label>
+        <input type="text" id="course" name="course" required><br><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+
+        <!-- Attendance will default to 0, no need to show in form -->
+        <button type="submit" id="submit">Add Student</button>
+    </form>
+     <!-- Place to show result -->
+  <div id="result"></div>
+        
+     </main>
+     <!---->
+     <aside>
+
+     </aside>
+     <footer>
+        <p>&copy; 2025 ABC School |All Rights Reserved</p>
+     </footer>
+     <script>
+        async function loaduser() {
+            const res=await fetch(
+								'http://localhost:8081/teacher/login/user-info',{
+								credentials:"include"
+								
+                                }
+							);
+            const teacherData=await res.json();
+            if(teacherData.username){
+            document.getElementById("welcome").innerHTML="Welcome, "+teacherData.username
+            }
+            else{
+                window.location.href="login.html";
+            }
+        }
+        loaduser();
+        document.getElementById('addStudent').addEventListener('submit',async (e) => {
+            e.preventDefault();
+             
+            const name=document.getElementById('name').value;
+            const course=document.getElementById('course').value;
+            const password=document.getElementById('password').value;
+            
+            const reqobj={name,course,password};
+            try {
+                const response=await fetch('http://localhost:8081/student/adddetails',{
+                        method:'Post',
+                        headers:{'Content-Type':'application/json'},
+                        body:JSON.stringify(reqobj)
+                });
+                const result=await response.json();
+                 if (response.ok) {
+                alert("Student added successfully!");
+                document.getElementById("result").innerHTML = `
+                    <p><strong>Generated Student ID:</strong> ${result.id}</p>
+                    <p><strong>Name:</strong> ${result.name}</p>
+                    <p><strong>Course:</strong> ${result.course}</p>
+                    <p><strong>Password:</strong> ${result.password}</p>
+                    <p>Please share this info with the student.</p>
+                `;
+            } else {
+	            alert('Error: ' + result.message || result);
+	        }
+            } catch (error) {
+                alert('Network error: ' + error);
+            }
+        })
+
+     </script>
+
+</body>
+</html>

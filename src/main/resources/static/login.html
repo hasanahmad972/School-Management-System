@@ -64,13 +64,17 @@
 								'http://localhost:8081/teacher/login', {
 							    method: 'POST',
 							    headers: { 'Content-Type': 'application/json' },
-							    body: JSON.stringify(loginObj)
+							    body: JSON.stringify(loginObj),
+								credentials:"include"
+								
 							}
 							);
 							const result = await response.text();
 							if (response.ok) {
 							            alert(result); // show "Teacher added successfully!"
-							            window.location.href = 'abc.html'; // redirect to login page
+							            
+										window.location.href = 'teacherdashboard.html'; // redirect to login page
+										
 							        } else {
 							            alert('Error: ' + result);
 							        }

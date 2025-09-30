@@ -20,6 +20,15 @@ public class Student {
 	private String Course;
 	@Column
 	private String password;
+	@Column(nullable = false, columnDefinition = "int default 0")
+	private int attendance = 0;
+	
+	public int getAttendance() {
+		return attendance;
+	}
+	public void setAttendance(int attendance) {
+		this.attendance = attendance;
+	}
 	public int getId() {
 		return id;
 	}
