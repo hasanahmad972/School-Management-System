@@ -65,5 +65,17 @@ public class StudentServiceImpl implements StudentService{
 				else {
 				throw new RuntimeException("Invalid Id ");}
 	}
+
+	@Override
+	public Student updateStudentAttandance(int id, int attendance) {
+		Student validStudent=sr.getById(id);
+		if(validStudent!=null) {
+			
+			validStudent.setAttendance(attendance);
+			return sr.save(validStudent);
+		}
+			else {
+			throw new RuntimeException("Invalid Id ");}
+	}
  
 }

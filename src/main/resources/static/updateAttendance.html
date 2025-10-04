@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        main {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            justify-content: center;
+        }
+
+        .btn-container {
+            display: flex;
+
+            gap: 30px;
+
+
+        }
+
+        .field-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .field-group input {
+            padding: 6px 10px;
+            border: 1px solid #999;
+            border-radius: 4px;
+            font-size: 14px;
+            width: 150px;
+        }
+
+        .btn {
+            padding: 6px 15px;
+            border: none;
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .btn1 {
+            background-color: #007bff;
+        }
+
+        /* Blue */
+
+
+        .btn:hover {
+            opacity: 0.85;
+        }
+    </style>
+    <link rel="stylesheet" href="css/index.css">
+
+
+</head>
+
+<body>
+
+    <!--Top BAR-->
+    <header class="h" id="header">
+        <div> ABC School </div>
+        <div id="welcome"> </div>
+    </header>
+    <!--Main navigation-->
+    <nav class="h" class="nav">
+        <ul>
+            <li><a href="teacherdashboard.html">Home</a></li>
+            <li><a href="addStudent.html">ADD STUDENT</a></li>
+            <li><a href="updateStudent.html">UPDATE STUDENT DETAILS</a></li>
+            <li><a href="updateAttendance.html">UPDATE ATTANDANCE</a></li>
+            <li><a href="changepassword.html">CHANGE PASSWORD</a></li>
+            <li><a href="logout.html">LOGOUT</a></li>
+
+        </ul>
+    </nav>
+    <!-- MAIN-->
+    <main>
+        <div class="btn-container">
+
+            <!-- Update Attandance-->
+            <div class="field-group">
+                <input type="text" id="id1" placeholder="Enter Student id">
+                <input type="text" id="attendance" placeholder="Update Attandance">
+                <button class="btn btn1">UPDATE Attandance</button>
+            </div>
+
+
+
+        </div>
+    </main>
+
+
+    <aside>
+
+    </aside>
+    <footer>
+        <p>&copy; 2025 ABC School |All Rights Reserved</p>
+    </footer>
+    <script>
+        async function loaduser() {
+            const res = await fetch(
+                'http://localhost:8081/teacher/login/user-info', {
+                credentials: "include"
+
+            }
+            );
+            const teacherData = await res.json();
+            if (teacherData.username) {
+                document.getElementById("welcome").innerHTML = "Welcome, " + teacherData.username
+            }
+            else {
+                window.location.href = "login.html";
+            }
+        }
+        loaduser();
+
+
+
+        //Attandance
+        document.getElementsByClassName('btn1')[0].addEventListener('click', async (e) => {
+            e.preventDefault();
+            const id=document.getElementById('id1').value;
+            const attendance=document.getElementById('attendance').value;
+            const updateAttendance={id,attendance};
+             try {
+
+	        // Send PUT request to Spring Boot controller
+	        const response = await fetch('http://localhost:8081/student/update/attendance', {
+	            method: 'PUT',
+	            headers: { 'Content-Type': 'application/json' },
+	            body: JSON.stringify(updateAttendance),
+                credentials: "include"
+	        });
+
+	        const result = await response.text(); // controller returns a string
+
+	        if (response.ok) {
+	            alert(result); 
+				
+				
+	            window.location.href = 'teacherdashboard.html'; // redirect to login page
+	        } else {
+	            alert('Error: ' + result);
+	        }
+
+	    } catch (error) {
+	        alert('Network error: ' + error);
+	    }
+        })
+
+
+
+
+    </script>
+
+</body>
+
+</html>

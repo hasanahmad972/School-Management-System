@@ -163,6 +163,26 @@ public ResponseEntity<?> updateCourse(@RequestBody Student s,HttpSession session
 				.body("error "+e.getMessage());
 	}
 }
+//attandance
+@PutMapping("/student/update/attendance")
+public ResponseEntity<?> updateAttandance(@RequestBody Student s,HttpSession session){
+	System.out.println(s);
+	try {
+		Student es=ss.updateStudentAttandance(s.getId(),s.getAttendance());
+		System.out.println(es);	
+		return ResponseEntity
+				.ok(es);
+		
+			
+	}
+	catch(Exception e) {
+		return ResponseEntity
+				.badRequest()
+				.body("error "+e.getMessage());
+	}
+}
+
+
 	
 }
 

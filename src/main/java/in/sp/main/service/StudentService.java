@@ -14,5 +14,7 @@ public interface StudentService {
    Student updateStudentName(int id, String name);
 
    Student updateStudentCourse(int id, String course);
+
+   Student updateStudentAttandance(int id, int attendance);
  
 }
