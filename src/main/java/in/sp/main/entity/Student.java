@@ -10,6 +10,11 @@ import jakarta.persistence.Table;
 @Entity
 @Table
 public class Student {
+	@Override
+	public String toString() {
+		return "Student [id=" + id + ", name=" + name + ", email=" + email + ", Course=" + Course + ", password="
+				+ password + ", attendance=" + attendance + "]";
+	}
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column

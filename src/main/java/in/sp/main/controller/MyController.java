@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -104,6 +105,64 @@ public class MyController {
 		  
     	
     }
+	@PutMapping("/student/update/email")
+	public ResponseEntity<?> updateEmail(@RequestBody Student s,HttpSession session){
+		System.out.println(s);
+		try {
+			Student es=ss.updateStudentEmail(s.getId(),s.getEmail());
+			System.out.println(es);	
+			return ResponseEntity
+					.ok(es);
+			
+				
+		}
+		catch(Exception e) {
+			return ResponseEntity
+					.badRequest()
+					.body("error "+e.getMessage());
+		}
+	}
+	
+
+	
+	                    //name
+	@PutMapping("/student/update/name")
+	public ResponseEntity<?> updateName(@RequestBody Student s,HttpSession session){
+		System.out.println(s);
+		try {
+			Student es=ss.updateStudentName(s.getId(),s.getName());
+			System.out.println(es);	
+			return ResponseEntity
+					.ok(es);
+			
+				
+		}
+		catch(Exception e) {
+			return ResponseEntity
+					.badRequest()
+					.body("error "+e.getMessage());
+		}
+	}
+	
+	                  
+    //course
+@PutMapping("/student/update/course")
+public ResponseEntity<?> updateCourse(@RequestBody Student s,HttpSession session){
+	System.out.println(s);
+	try {
+		Student es=ss.updateStudentCourse(s.getId(),s.getCourse());
+		System.out.println(es);	
+		return ResponseEntity
+				.ok(es);
+		
+			
+	}
+	catch(Exception e) {
+		return ResponseEntity
+				.badRequest()
+				.body("error "+e.getMessage());
+	}
+}
 	
 }
 

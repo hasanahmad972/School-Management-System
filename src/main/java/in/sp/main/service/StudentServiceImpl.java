@@ -1,5 +1,7 @@
 package in.sp.main.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +27,43 @@ public class StudentServiceImpl implements StudentService{
 		return validStudent;}
 		else {
 		throw new RuntimeException("Invalid Username or Password ");}
+	}
+
+	@Override
+	public Student updateStudentEmail(int id, String email) {
+		      Student validStudent=sr.getById(id);
+		if(validStudent!=null) {
+			
+			validStudent.setEmail(email);
+			return sr.save(validStudent);
+		}
+			else {
+			throw new RuntimeException("Invalid Id ");}
+		
+	}
+
+	@Override
+	public Student updateStudentName(int id, String name) {
+	      Student validStudent=sr.getById(id);
+			if(validStudent!=null) {
+				
+				validStudent.setName(name);
+				return sr.save(validStudent);
+			}
+				else {
+				throw new RuntimeException("Invalid Id ");}
+	}
+
+	@Override
+	public Student updateStudentCourse(int id, String course) {
+	      Student validStudent=sr.getById(id);
+			if(validStudent!=null) {
+				
+				validStudent.setCourse(course);
+				return sr.save(validStudent);
+			}
+				else {
+				throw new RuntimeException("Invalid Id ");}
 	}
  
 }
